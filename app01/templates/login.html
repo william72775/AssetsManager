@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+{#    <link rel="stylesheet" href="../static/plugins/bootstrap/css/bootstrap.css">#}
+{#    使用static方式引入静态文件#}
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap/css/bootstrap.css' %}">
+    <style>
+        .box {
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 50px;
+            min-height: 50px;
+            width: 300px;
+            padding: 15px 30px;
+            border: #dddddddd 1px solid;
+            border-radius: 5px;
+            box-shadow: 5px 10px 2px rgb(0 0 0 /5%);
+
+        }
+        .box h1 {
+            font-size: large;
+            font-weight: bold;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>
+            User Login
+        </h1>
+
+        <form action="/login/" method="post">
+{#            Set csrf_token to prevent cross site request forgery(CSRF跨站点请求伪装) #}
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+            <span style="color: red; font-size: small">{{ error }}</span>
+        </form>
+    </div>
+
+
+</body>
+</html>
