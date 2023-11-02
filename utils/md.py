@@ -11,6 +11,9 @@ class DemoMiddleware(MiddlewareMixin):
         user_info = request.session.get('user_info')
         # 有值，比送到hi已经发让路，继续
         if user_info:
+            request.unicom_userid = user_info['id']
+            request.unicom_username = user_info['username']
+
             return
         # 无值=None
         return redirect('/login/')

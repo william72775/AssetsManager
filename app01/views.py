@@ -25,13 +25,24 @@ def login(request):
 
 
 def depart_list(request):
-    user_info = request.session.get("user_info")
-    if not user_info:
-        return redirect('/login/')
-    return HttpResponse("部门列表")
+    # user_info = request.session.get("user_info")
+    # if not user_info:
+    #     return redirect('/login/')
+    print(request.unicom_userid)
+    print(request.unicom_username)
+    # 获取部门信息数据
+    depart_objs = models.Department.objects.all().order_by('-id')
+    # 传到前端页面
+    return render(request, "depart_list.html", {"queryset": depart_objs})
+
+
+def logout(request):
+    request.session.clear()
+    return redirect('/login/')
+
 
 def asset_list(request):
-    user_info = request.session.get("user_info")
-    if not user_info:
-        return redirect('/login/')
+    # user_info = request.session.get("user_info")
+    # if not user_info:
+    #     return redirect('/login/')
     return HttpResponse("工司资产信息")
